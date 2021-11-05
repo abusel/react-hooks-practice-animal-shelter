@@ -1,24 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Pet() {
+function Pet({ pet }) {
+  const [adopted, setAdopted] = useState(pet.isAdopted)
+  function persistAdopt(){
+    
+  }
   return (
     <div className="card" data-testid="pet">
       <div className="content">
         <span className="header">
           {/*'♀' OR '♂' */}
-          PET NAME
+          {pet.name}
         </span>
         <div className="meta">
-          <span className="date">PET TYPE</span>
+          <span className="date">{pet.type}</span>
         </div>
         <div className="description">
-          <p>Age: PET AGE</p>
-          <p>Weight: PET WEIGHT</p>
+          <p>{pet.age} years old</p>
+          <p>{pet.weight} {pet.weight === 1 ? 'lb' : 'lbs'}</p>
         </div>
       </div>
       <div className="extra content">
-        <button className="ui disabled button">Already adopted</button>
-        <button className="ui primary button">Adopt pet</button>
+        {adopted ? 
+        <button className="ui disabled button">Already adopted</button> 
+        :
+        <button className="ui primary button" onClick= {()=> setAdopted(true)}>Adopt pet</button>
+        }
       </div>
     </div>
   );
